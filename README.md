@@ -147,5 +147,3 @@ export function MyComponent() {
 ## 📄 License
 
 MIT — feel free to use it in personal or commercial projects.
-
-gere para mim o arquivo para eu baixar

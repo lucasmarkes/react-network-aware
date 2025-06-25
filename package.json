@@ -4,6 +4,14 @@
   "type": "module",
   "main": "dist/react-network-aware.umd.js",
   "description": "A React hook to detect network changes and handle online/offline events.",
+  "keywords": [
+    "react",
+    "hook",
+    "network",
+    "online",
+    "offline",
+    "event"
+  ],
   "module": "dist/react-network-aware.es.js",
   "types": "dist/index.d.ts",
   "files": [
