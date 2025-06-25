@@ -9,6 +9,11 @@ type NetworkInformation = {
   removeEventListener?: (type: 'change', listener: () => void) => void;
 };
 
+type NetworkInformationWithEvents = NetworkInformation & {
+  addEventListener?: (type: 'change', listener: () => void) => void;
+  removeEventListener?: (type: 'change', listener: () => void) => void;
+};
+
 type NetworkStatus = {
   online: boolean;
   effectiveType?: string;
@@ -18,7 +23,8 @@ type NetworkStatus = {
 };
 
 export function useNetworkStatus(): NetworkStatus {
-  const connection = (navigator as any).connection as NetworkInformation | undefined;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const connection = (navigator as any).connection as NetworkInformationWithEvents | undefined;
 
   const [status, setStatus] = useState<NetworkStatus>({
     online: navigator.onLine,
