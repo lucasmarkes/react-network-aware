@@ -1,6 +1,6 @@
 {
   "name": "react-network-aware",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "type": "module",
   "main": "dist/react-network-aware.umd.js",
   "module": "dist/react-network-aware.es.js",
