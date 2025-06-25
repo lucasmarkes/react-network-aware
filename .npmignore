@@ -1,0 +1,12 @@
+# Ignore source files and configs not needed in published package
+src/
+.vscode/
+tests/
+*.config.js
+*.config.ts
+.gitignore
+.eslintrc*
+.prettierrc*
+tsconfig*.json
+*.log
+node_modules/
