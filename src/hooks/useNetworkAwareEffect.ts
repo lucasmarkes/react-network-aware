@@ -5,7 +5,7 @@ type EffectCallback = () => void | (() => void);
 
 export function useNetworkAwareEffect(
   effect: EffectCallback,
-  deps: any[] = [],
+  deps: unknown[] = [],
   onlyWhenOnline: boolean = true
 ) {
   const { online } = useNetworkStatus();
@@ -14,6 +14,6 @@ export function useNetworkAwareEffect(
     if ((onlyWhenOnline && online) || (!onlyWhenOnline && !online)) {
       return effect();
     }
-
-  }, [online, ...deps]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [online, onlyWhenOnline, ...deps]);
 }
