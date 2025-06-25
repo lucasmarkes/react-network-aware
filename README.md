@@ -1,11 +1,23 @@
 # React Network Aware
 
-React hooks to detect network status and quality in your app.
-Ideal for PWAs, global apps, and any app needing to adapt to changing network conditions.
+
+
+**React Network Aware** is a lightweight React utility library that provides hooks to detect and respond to network status and connection quality.\
+It’s ideal for building **PWAs**, **global applications**, and any app that needs to adapt to changing network conditions, such as slow connections or offline mode.
 
 ---
 
-## Installation
+## 🚀 Features
+
+✅ Detect online / offline status\
+✅ Get connection quality details (downlink, RTT, data saver)\
+✅ Identify slow connections with customizable thresholds\
+✅ Run effects conditionally based on network status\
+✅ Zero dependencies, tiny bundle size
+
+---
+
+## 📦 Installation
 
 Install via npm:
 
@@ -13,91 +25,127 @@ Install via npm:
 npm install react-network-aware
 ```
 
+Or with yarn:
+
+```bash
+yarn add react-network-aware
+```
+
 ---
 
-## Hooks
+## 🧠 Hooks API
+
+---
 
 ### `useNetworkStatus`
 
-Returns the current network status:
+Get detailed network information.
+
+#### Usage
 
 ```tsx
 const { online, effectiveType, downlink, saveData, rtt } = useNetworkStatus();
 ```
 
-- **online**: `boolean` — online/offline status
-- **effectiveType**: `string | undefined` — e.g. `'2g'`, `'3g'`, `'4g'`, `'wifi'`
-- **downlink**: `number | undefined` — estimated Mbps
-- **saveData**: `boolean | undefined` — if user enabled data saver mode
-- **rtt**: `number | undefined` — round-trip time in milliseconds
+#### Returned values
+
+| Name            | Type                   | Description                                            |
+| --------------- | ---------------------- | ------------------------------------------------------ |
+| `online`        | `boolean`              | `true` if online, `false` if offline                   |
+| `effectiveType` | `string \| undefined`  | Connection type: `'2g'`, `'3g'`, `'4g'`, `'wifi'`, etc |
+| `downlink`      | `number \| undefined`  | Estimated downlink in Mbps                             |
+| `saveData`      | `boolean \| undefined` | If user enabled data saver mode                        |
+| `rtt`           | `number \| undefined`  | Estimated round-trip time in ms                        |
 
 ---
 
 ### `useSlowConnection`
 
-Detects if the connection is considered slow:
+Detect if the connection should be considered slow based on thresholds.
+
+#### Usage
 
 ```tsx
 const isSlow = useSlowConnection({ downlinkThreshold: 1, rttThreshold: 300 });
 ```
 
-- **downlinkThreshold** (default `1`) — Mbps threshold below which connection is slow
-- **rttThreshold** (default `300`) — RTT in ms above which connection is slow
+#### Options
 
-Returns `true` if connection is slow, `false` otherwise.
+| Name                | Type     | Default | Description                             |
+| ------------------- | -------- | ------- | --------------------------------------- |
+| `downlinkThreshold` | `number` | `1`     | Below this Mbps, connection is slow     |
+| `rttThreshold`      | `number` | `300`   | Above this RTT (ms), connection is slow |
+
+#### Returns
+
+`true` if connection is slow, `false` otherwise.
 
 ---
 
 ### `useNetworkAwareEffect`
 
-Runs an effect only when the network status matches the specified condition (online or offline):
+Run an effect only when network matches a certain status (online or offline).
+
+#### Usage
 
 ```tsx
 useNetworkAwareEffect(
   () => {
-    // effect code here
+    // your effect logic
   },
   [/* dependencies */],
-  true // run effect only when online (default)
+  true // run only when online (default)
 );
 ```
 
-## Example Usage
+#### Params
+
+| Param            | Type                       | Default | Description                                          |
+| ---------------- | -------------------------- | ------- | ---------------------------------------------------- |
+| `effect`         | `() => void \| () => void` | -       | Effect callback                                      |
+| `deps`           | `any[]`                    | `[]`    | Dependency array                                     |
+| `onlyWhenOnline` | `boolean`                  | `true`  | Run effect when online (`true`) or offline (`false`) |
+
+---
+
+## ⚡ Example Usage
 
 ```tsx
 import React from 'react';
 import { useNetworkStatus, useSlowConnection, useNetworkAwareEffect } from 'react-network-aware';
 
 export function MyComponent() {
-  const { online } = useNetworkStatus();
+  const { online, effectiveType, downlink } = useNetworkStatus();
   const isSlow = useSlowConnection();
 
   useNetworkAwareEffect(() => {
-    // Fetch data only when online
+    console.log("Fetching data only when online...");
     fetch('/api/data')
       .then(res => res.json())
       .then(data => console.log(data));
   }, [], true);
 
   if (!online) {
-    return <p>You are offline</p>;
+    return <p>⚠️ You are offline</p>;
   }
 
   if (isSlow) {
-    return <p>Slow connection detected. Showing lightweight version.</p>;
+    return (
+      <p>
+        🐢 Slow connection detected (type: {effectiveType}, downlink: {downlink} Mbps).
+        Showing lightweight version.
+      </p>
+    );
   }
 
-  return <p>Connection is good</p>;
+  return <p>✅ Connection is good</p>;
 }
 ```
----
-
-## Contributing
-
-Feel free to open issues or submit pull requests!
 
 ---
 
-## License
+## 📄 License
 
-MIT
+MIT — feel free to use it in personal or commercial projects.
+
+gere para mim o arquivo para eu baixar
