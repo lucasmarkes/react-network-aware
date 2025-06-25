@@ -3,11 +3,9 @@
   "version": "0.1.4",
   "type": "module",
   "main": "dist/react-network-aware.umd.js",
+  "description": "A React hook to detect network changes and handle online/offline events.",
   "module": "dist/react-network-aware.es.js",
   "types": "dist/index.d.ts",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  },
   "files": [
     "dist"
   ],
