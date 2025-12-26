@@ -4,6 +4,16 @@
   "type": "module",
   "main": "dist/react-network-aware.umd.js",
   "description": "A React hook to detect network changes and handle online/offline events.",
+  "author": "Lucas Marques",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lucasmarkes/react-network-aware.git"
+  },
+  "homepage": "https://github.com/lucasmarkes/react-network-aware#readme",
+  "bugs": {
+    "url": "https://github.com/lucasmarkes/react-network-aware/issues"
+  },
   "keywords": [
     "react",
     "hook",
